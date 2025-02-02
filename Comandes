@@ -5,5 +5,19 @@ hadoop fs -mkdir /Resultat
 
 # Chargement des données dans HDFS :
 hadoop fs -put DataSet/u.data /DataSet
-hadoop fs -put DataSet/u.data /DataSet
-hadoop fs -put DataSet/u.data /DataSet
+hadoop fs -put DataSet/u.item /DataSet
+hadoop fs -put DataSet/u.user /DataSet
+
+### Étape 2 : Exécution des algorithmes de recommandation avec Mahout
+#  Calcul des similarités entre les items :
+mahout itemsimimmarity -i /DataSet/u.data -o /Results/item-similarity -s SIMILARITY_COSINE
+
+# Génération des recommandations :
+ mahout/bin/mahout recommenditembased -i DatSet/u.data -o itemRecomm.txt -s 
+SIMILARITY_LOGLIKELIHOOD --numRecommendations 5
+
+### Étape 3 : Extraction des résultats :
+# Résultat de calcul des similarités entre les items:
+hadoop fs -get /Results/item-similarity/part-r-00000
+# Résultat de génération des recommandations :
+hadoop fs -cat /Results/itemRecomm.txt
