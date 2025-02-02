@@ -1,0 +1,9 @@
+### Étape 1 : Chargement des données prétraitées sur HDFS
+# Création des répertoires sur HDFS :
+hadoop fs -mkdir /DataSet
+hadoop fs -mkdir /Resultat
+
+# Chargement des données dans HDFS :
+hadoop fs -put DataSet/u.data /DataSet
+hadoop fs -put DataSet/u.data /DataSet
+hadoop fs -put DataSet/u.data /DataSet
